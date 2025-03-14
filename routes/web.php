@@ -5,12 +5,8 @@ use App\Http\Controllers\HasilController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\InstansiController;
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-// Route::resource('hasil', HasilController::class);
 Route::get('/', [HasilController::class, 'index'])->name('home');
+Route::resource('hasil', HasilController::class);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -34,7 +34,7 @@ class HasilController extends Controller
         $validated = $request->validate([
             'kepuasan' => 'required|string',
             'pungutan' => 'required|string',
-            'saran' => 'nullable|string|max:100', 
+            'saran' => 'nullable|string|max:100',
             'instansi_id' => 'required|exists:instansi,id',
         ], [
             'kepuasan.required' => 'Kolom kepuasan wajib diisi!',
@@ -42,6 +42,8 @@ class HasilController extends Controller
             'instansi_id.required' => 'Kolom instansi wajib diisi!',
             'saran.max' => 'Tidak boleh lebih dari 100 karakter!',
         ]);
+
+        $saran = str_replace(' ', '', $request->input('saran'));
 
         Hasil::create([
             'kepuasan' => $request->input('kepuasan'),
@@ -52,7 +54,6 @@ class HasilController extends Controller
 
         return redirect()->route('hasil.index')->with('success', 'Hasil telah berhasil disimpan!');
     }
-
 
     /**
      * Display the specified resource.
