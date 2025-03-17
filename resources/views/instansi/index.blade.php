@@ -29,64 +29,88 @@
 
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="text-lg font-semibold">List Instansi</h3>
-                        <button @click="openAddModal = true"
-                            class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all">
-                            Tambah Instansi
-                        </button>
+                        <div class="flex space-x-2">
+                            <form action="{{ route('instansi.index') }}" method="GET" class="flex items-center">
+                                <input type="text" name="search" placeholder="Cari Instansi"
+                                    class="px-4 py-2 border rounded-lg" value="{{ request('search') }}">
+                                <button type="submit"
+                                    class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all ml-1">Cari</button>
+                            </form>
+                            <button @click="openAddModal = true"
+                                class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-all">
+                                Tambah Instansi
+                            </button>
+                        </div>
                     </div>
 
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full bg-white border border-gray-200 rounded-lg overflow-hidden">
-                            <thead class="bg-gray-100">
+                    <div class="overflow-hidden">
+                        <table class="w-full border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                            <thead class="bg-blue-600 text-white">
                                 <tr>
-                                    <th
-                                        class="w-16 px-4 py-3 text-center text-xs font-semibold text-gray-600 uppercase border">
-                                        No</th>
-                                    <th
-                                        class="px-6 py-3 text-center text-xs font-semibold text-gray-600 uppercase border">
-                                        Nama Instansi</th>
-                                    <th
-                                        class="px-6 py-3 text-center text-xs font-semibold text-gray-600 uppercase border">
-                                        Aksi</th>
+                                    <th class="w-16 px-4 py-3 text-center text-xs font-semibold uppercase border">
+                                        No
+                                    </th>
+                                    <th class="px-6 py-3 text-center text-xs font-semibold uppercase border">
+                                        Nama Instansi
+                                    </th>
+                                    <th class="px-6 py-3 text-center text-xs font-semibold uppercase border">
+                                        Aksi
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse ($instansi as $index => $item)
-                                    <tr class="border-b hover:bg-gray-50">
-                                        <td class="text-center px-6 py-4 border">{{ $index + 1 }}</td>
+                                    <tr class="border-b hover:bg-gray-100 transition-all">
+                                        <td class="text-center px-6 py-4 border">
+                                            {{ $index + 1 + ($instansi->currentPage() - 1) * $instansi->perPage() }}
+                                        </td>
                                         <td class="text-center px-6 py-4 border">{{ $item->nama_instansi }}</td>
                                         <td class="px-6 py-4 border text-center space-x-2">
+                                            <!-- Tombol Edit -->
                                             <button
                                                 @click="openEditModal = true; editId = '{{ $item->id }}'; editNama = '{{ $item->nama_instansi }}'"
                                                 class="px-3 py-1 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-all">
                                                 <i class="fa-solid fa-pen"></i>
                                             </button>
+
+                                            <!-- Tombol Hapus -->
                                             <button @click="openDeleteModal = true; deleteId = '{{ $item->id }}'"
                                                 class="px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all">
                                                 <i class="fa-solid fa-trash"></i>
                                             </button>
-                                            <button
+
+                                            <!-- Tombol Lihat -->
+                                            <a href="{{ route('instansi.show', $item->id) }}"
                                                 class="px-3 py-1 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-all">
-                                                <a href="{{ route('instansi.show', $item->id) }}">
-                                                    <a href="{{ route('instansi.show', $item->id) }}">
-                                                        <i class="fa-solid fa-eye"></i>
-                                                    </a>
-                                                </a>
-                                            </button>
+                                                <i class="fa-solid fa-eye"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                 @empty
-                                    <tr>
-                                        <td colspan="3" class="px-6 py-4 text-center text-gray-500">Tidak ada
-                                            instansi yang tersedia.</td>
-                                    </tr>
+                                    @if (request()->has('search') && $instansi->isEmpty())
+                                        <tr>
+                                            <td colspan="3" class="px-6 py-4 text-center text-gray-500">
+                                                <img src="{{ asset('images/not-found.png') }}"
+                                                    alt="No Search Results" class="mx-auto w-[200px] h-[200px]">
+                                                <p class="mt-4">Instansi tidak ditemukan.</p>
+                                            </td>
+                                        </tr>
+                                    @else
+                                        <tr>
+                                            <td colspan="3" class="px-6 py-4 text-center text-gray-500">
+                                                <img src="{{ asset('images/empty.png') }}" alt="No Data Found"
+                                                    class="mx-auto w-[200px] h-[200px]">
+                                                <p class="mt-4">Belum ada instansi yang terdaftar.</p>
+                                            </td>
+                                        </tr>
+                                    @endif
                                 @endforelse
                             </tbody>
                         </table>
 
                         <!-- pagination -->
-                        <div class="mt-6 flex justify-center">
-                            {{ $instansi->links('vendor.pagination.tailwind') }}
+                        <div class="mt-6 mb-4 flex justify-center">
+                            {{ $instansi->appends(request()->query())->links('vendor.pagination.tailwind') }}
                         </div>
 
                     </div>
@@ -111,7 +135,7 @@
                     @enderror
 
 
-                    
+
 
                     <div class="flex justify-end space-x-2 mt-4">
                         <button type="button" @click="openAddModal = false"

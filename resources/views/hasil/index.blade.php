@@ -20,29 +20,103 @@
 
     <style>
         body {
-            background-image: url('https://cdnjs.cloudflare.com/ajax/libs/simple-icons/3.0.1/simple-icons.svg'), linear-gradient(135deg, #6366f1 0%, #3b82f6 50%, #2dd4bf 100%);
-            background-size: cover;
+            /* Replace with a more vibrant gradient and pattern combination */
+            background:
+                url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E"),
+                radial-gradient(circle at 25% 25%, #4f46e5 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, #2dd4bf 0%, transparent 50%),
+                linear-gradient(135deg, #6366f1 0%, #3b82f6 50%, #2dd4bf 100%);
+            background-size: 20px 20px, 100% 100%, 100% 100%, 100% 100%;
             background-attachment: fixed;
             background-position: center;
             position: relative;
+            animation: gradientShift 15s ease infinite;
         }
 
-        body::before {
+        /* Add animated gradient shift */
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 0%, 25% 25%, 75% 75%, 0% 50%;
+            }
+
+            50% {
+                background-position: 20px 10px, 35% 15%, 65% 85%, 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 0%, 25% 25%, 75% 75%, 0% 50%;
+            }
+        }
+
+        /* Add floating particles */
+        body::after {
             content: '';
             position: absolute;
             top: 0;
             right: 0;
             bottom: 0;
             left: 0;
+            background-image:
+                radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 10%),
+                radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 8%),
+                radial-gradient(circle at 70% 20%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 12%),
+                radial-gradient(circle at 90% 60%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 9%),
+                radial-gradient(circle at 50% 80%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 11%);
+            background-size: 150% 150%;
+            animation: floatingParticles 20s ease-in-out infinite alternate;
+            pointer-events: none;
             z-index: -1;
         }
 
+        @keyframes floatingParticles {
+            0% {
+                background-position: 0% 0%, 20% 20%, 40% 40%, 60% 60%, 80% 80%;
+            }
+
+            100% {
+                background-position: 20% 0%, 40% 20%, 60% 40%, 80% 60%, 100% 80%;
+            }
+        }
+
         .form-container {
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(8px);
-            border-radius: 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border-radius: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow:
+                0 25px 50px -12px rgba(0, 0, 0, 0.25),
+                0 0 20px rgba(79, 70, 229, 0.2);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg at 50% 50%,
+                    rgba(79, 70, 229, 0.1) 0%,
+                    rgba(59, 130, 246, 0.1) 25%,
+                    rgba(45, 212, 191, 0.1) 50%,
+                    rgba(79, 70, 229, 0.1) 75%,
+                    rgba(59, 130, 246, 0.1) 100%);
+            animation: rotateBg 60s linear infinite;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        @keyframes rotateBg {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .header-survey {

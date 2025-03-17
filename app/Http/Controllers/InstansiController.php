@@ -11,9 +11,16 @@ class InstansiController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $instansi = Instansi::paginate(10);
+        $query = Instansi::query();
+
+        if ($request->has('search') && $request->search != '') {
+            $query->where('nama_instansi', 'like', '%' . $request->search . '%');
+        }
+
+        $instansi = $query->paginate(5);
+
         return view('instansi.index', compact('instansi'));
     }
 
@@ -47,9 +54,23 @@ class InstansiController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Instansi $instansi)
+    public function show(Instansi $instansi, Request $request)
     {
-        $hasil = $instansi->hasil()->paginate(10);
+        $request->validate([
+            'start_date' => ['nullable', 'date'],
+            'end_date' => ['nullable', 'date', 'after_or_equal:start_date'],
+        ], [
+            'end_date.after_or_equal' => 'Tanggal akhir tidak boleh sebelum dari tanggal mulai.',
+        ]);
+
+        $query = $instansi->hasil();
+
+        if ($request->filled('start_date') && $request->filled('end_date')) {
+            $query->whereBetween('created_at', [$request->start_date, $request->end_date]);
+        }
+
+        $hasil = $query->paginate(5);
+
         return view('instansi.show', compact('instansi', 'hasil'));
     }
 
