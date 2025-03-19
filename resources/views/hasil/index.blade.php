@@ -20,7 +20,7 @@
 
     <style>
         body {
-            /* Replace with a more vibrant gradient and pattern combination */
+            /* Background dengan gradien dan pattern */
             background:
                 url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E"),
                 radial-gradient(circle at 25% 25%, #4f46e5 0%, transparent 50%),
@@ -33,7 +33,7 @@
             animation: gradientShift 15s ease infinite;
         }
 
-        /* Add animated gradient shift */
+        /* Animasi pergeseran gradien */
         @keyframes gradientShift {
             0% {
                 background-position: 0% 0%, 25% 25%, 75% 75%, 0% 50%;
@@ -48,7 +48,7 @@
             }
         }
 
-        /* Add floating particles */
+        /* Partikel melayang */
         body::after {
             content: '';
             position: absolute;
@@ -120,12 +120,12 @@
         }
 
         .header-survey {
-            margin: -1.5rem -1.5rem 1.5rem -1.5rem;
             padding: 1.5rem;
             border-radius: 1rem 1rem 0 0;
             color: white;
             position: relative;
             overflow: hidden;
+            background: linear-gradient(120deg, #4f46e5, #3b82f6);
         }
 
         .header-survey::before {
@@ -154,8 +154,8 @@
             background-color: rgba(255, 255, 255, 0.7);
             border-radius: 0.75rem;
             border: 1px solid rgba(209, 213, 219, 0.5);
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             transition: box-shadow 0.3s ease, transform 0.3s ease;
         }
@@ -247,20 +247,90 @@
             animation: float 2s ease-in-out infinite;
         }
 
-        @media (max-width: 640px) {
+        /* Gaya baru untuk layout horizontal */
+        .survey-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .survey-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .form-container {
+            max-width: 1000px;
+        }
+
+        .survey-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .survey-step {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #4f46e5;
+            color: white;
+            font-weight: bold;
+            margin-right: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.3);
+        }
+
+        .survey-header-content {
+            z-index: 1;
+            position: relative;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 767px) {
             .header-survey {
-                margin: -1rem -1rem 1rem -1rem;
                 padding: 1rem;
             }
+        }
+
+        /* Card effect improvement */
+        .hoverable-card {
+            transition: all 0.3s ease;
+            transform: scale(1);
+        }
+
+        .hoverable-card:hover {
+            transform: scale(1.03);
         }
     </style>
 </head>
 
 <body class="font-sans antialiased flex items-center justify-center min-h-screen p-4">
-    <div class="w-full max-w-2xl form-container p-6">
+    <div class="w-full form-container p-6">
         <div class="header-survey text-center mb-6">
-            <h2 class="text-3xl font-bold text-black">Survey Tingkat Kepuasan</h2>
-            <p class="text-gray-600 mt-2">Silakan isi data kepuasan dan pungutan sesuai dengan instansi</p>
+            <div class="survey-header-content">
+                <h2 class="text-3xl font-bold">Survey Tingkat Kepuasan</h2>
+                <p class="text-white mt-2">Silakan isi data kepuasan dan pungutan sesuai dengan instansi</p>
+            </div>
         </div>
 
         <form method="POST" action="{{ route('hasil.store') }}">
@@ -282,140 +352,148 @@
                 </div>
             @endif
 
-            <!-- Pilih Instansi -->
-            <div class="form-section">
-                <div class="section-title">
-                    <i class="fas fa-building"></i>
-                    <span>Pilih Nama Instansi</span>
-                </div>
-                <select name="instansi_id" id="instansi_id"
-                    class="select-instansi block w-full px-4 py-3 border rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                    <option value="" disabled {{ old('instansi_id') == '' ? 'selected' : '' }}>-- Pilih Instansi
-                        --
-                    </option>
-                    @foreach ($instansi as $item)
-                        <option value="{{ $item->id }}" {{ old('instansi_id') == $item->id ? 'selected' : '' }}>
-                            {{ $item->nama_instansi }}
+            <div class="survey-grid">
+                <!-- Kolom 1: Pilih Instansi -->
+                <div class="form-section hoverable-card fade-in">
+                    <div class="survey-step mb-4">1</div>
+                    <div class="section-title">
+                        <i class="fas fa-building"></i>
+                        <span>Pilih Nama Instansi</span>
+                    </div>
+                    <select name="instansi_id" id="instansi_id"
+                        class="select-instansi block w-full px-4 py-3 border rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                        <option value="" disabled {{ old('instansi_id') == '' ? 'selected' : '' }}>-- Pilih
+                            Instansi --
                         </option>
-                    @endforeach
-                </select>
-                @error('instansi_id')
-                    <p class="mt-2 text-sm text-red-600 flex items-center">
-                        <i class="fas fa-exclamation-circle mr-1"></i>
-                        {{ $message }}
-                    </p>
-                @enderror
-            </div>
+                        @foreach ($instansi as $item)
+                            <option value="{{ $item->id }}" {{ old('instansi_id') == $item->id ? 'selected' : '' }}>
+                                {{ $item->nama_instansi }}
+                            </option>
+                        @endforeach
+                    </select>
+                    
+                    <div class="text-center pt-4">
+                        <img src="{{ asset('images/image.png') }}" alt="Instansi Icon"
+                            class="mx-auto w-[150px] h-[150px] max-w-full">
+                    </div>
 
-            <!-- Pilih Kepuasan dengan Emoji -->
-            <div class="form-section">
-                <div class="section-title">
-                    <i class="fas fa-smile"></i>
-                    <span>Tingkat Kepuasan</span>
+                    @error('instansi_id')
+                        <p class="mt-2 text-sm text-red-600 flex items-center">
+                            <i class="fas fa-exclamation-circle mr-1"></i>
+                            {{ $message }}
+                        </p>
+                    @enderror
                 </div>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                    <label class="relative cursor-pointer">
-                        <input type="radio" name="kepuasan" value="Sangat Puas" class="sr-only peer"
-                            {{ old('kepuasan') == 'Sangat Puas' ? 'checked' : '' }}>
-                        <div
-                            class="emoji-card flex flex-col items-center justify-center border-2 border-gray-200 rounded-xl p-4 hover:bg-blue-50 peer-checked:border-blue-500 peer-checked:bg-blue-100 transition-all duration-200">
-                            <span class="text-4xl mb-2 emoji-float">😍</span>
-                            <span class="text-sm font-medium text-center">Sangat Puas</span>
-                        </div>
-                    </label>
-                    <label class="relative cursor-pointer">
-                        <input type="radio" name="kepuasan" value="Puas" class="sr-only peer"
-                            {{ old('kepuasan') == 'Puas' ? 'checked' : '' }}>
-                        <div
-                            class="emoji-card flex flex-col items-center justify-center border-2 border-gray-200 rounded-xl p-4 hover:bg-blue-50 peer-checked:border-blue-500 peer-checked:bg-blue-100 transition-all duration-200">
-                            <span class="text-4xl mb-2 emoji-float">😊</span>
-                            <span class="text-sm font-medium text-center">Puas</span>
-                        </div>
-                    </label>
-                    <label class="relative cursor-pointer">
-                        <input type="radio" name="kepuasan" value="Cukup Puas" class="sr-only peer"
-                            {{ old('kepuasan') == 'Cukup Puas' ? 'checked' : '' }}>
-                        <div
-                            class="emoji-card flex flex-col items-center justify-center border-2 border-gray-200 rounded-xl p-4 hover:bg-blue-50 peer-checked:border-blue-500 peer-checked:bg-blue-100 transition-all duration-200">
-                            <span class="text-4xl mb-2 emoji-float">😐</span>
-                            <span class="text-sm font-medium text-center">Cukup Puas</span>
-                        </div>
-                    </label>
-                    <label class="relative cursor-pointer">
-                        <input type="radio" name="kepuasan" value="Tidak Puas" class="sr-only peer"
-                            {{ old('kepuasan') == 'Tidak Puas' ? 'checked' : '' }}>
-                        <div
-                            class="emoji-card flex flex-col items-center justify-center border-2 border-gray-200 rounded-xl p-4 hover:bg-blue-50 peer-checked:border-blue-500 peer-checked:bg-blue-100 transition-all duration-200">
-                            <span class="text-4xl mb-2 emoji-float">😠</span>
-                            <span class="text-sm font-medium text-center">Tidak Puas</span>
-                        </div>
-                    </label>
-                </div>
-                @error('kepuasan')
-                    <p class="mt-2 text-sm text-red-600 flex items-center">
-                        <i class="fas fa-exclamation-circle mr-1"></i>
-                        {{ $message }}
-                    </p>
-                @enderror
-            </div>
 
-            <!-- Pilih Pungutan dengan Emoji -->
-            <div class="form-section">
-                <div class="section-title">
-                    <i class="fas fa-hand-holding-usd"></i>
-                    <span>Apakah Ada Pungutan?</span>
+                <!-- Kolom 2: Tingkat Kepuasan -->
+                <div class="form-section hoverable-card fade-in" style="animation-delay: 0.1s">
+                    <div class="survey-step mb-4">2</div>
+                    <div class="section-title">
+                        <i class="fas fa-smile"></i>
+                        <span>Tingkat Kepuasan</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <label class="relative cursor-pointer">
+                            <input type="radio" name="kepuasan" value="Sangat Puas" class="sr-only peer"
+                                {{ old('kepuasan') == 'Sangat Puas' ? 'checked' : '' }}>
+                            <div
+                                class="emoji-card flex flex-col items-center justify-center border-2 border-gray-200 rounded-xl p-4 hover:bg-blue-50 peer-checked:border-blue-500 peer-checked:bg-blue-100 transition-all duration-200">
+                                <span class="text-4xl mb-2 emoji-float">😍</span>
+                                <span class="text-sm font-medium text-center">Sangat Puas</span>
+                            </div>
+                        </label>
+                        <label class="relative cursor-pointer">
+                            <input type="radio" name="kepuasan" value="Puas" class="sr-only peer"
+                                {{ old('kepuasan') == 'Puas' ? 'checked' : '' }}>
+                            <div
+                                class="emoji-card flex flex-col items-center justify-center border-2 border-gray-200 rounded-xl p-4 hover:bg-blue-50 peer-checked:border-blue-500 peer-checked:bg-blue-100 transition-all duration-200">
+                                <span class="text-4xl mb-2 emoji-float">😊</span>
+                                <span class="text-sm font-medium text-center">Puas</span>
+                            </div>
+                        </label>
+                        <label class="relative cursor-pointer">
+                            <input type="radio" name="kepuasan" value="Cukup Puas" class="sr-only peer"
+                                {{ old('kepuasan') == 'Cukup Puas' ? 'checked' : '' }}>
+                            <div
+                                class="emoji-card flex flex-col items-center justify-center border-2 border-gray-200 rounded-xl p-4 hover:bg-blue-50 peer-checked:border-blue-500 peer-checked:bg-blue-100 transition-all duration-200">
+                                <span class="text-4xl mb-2 emoji-float">😐</span>
+                                <span class="text-sm font-medium text-center">Cukup Puas</span>
+                            </div>
+                        </label>
+                        <label class="relative cursor-pointer">
+                            <input type="radio" name="kepuasan" value="Tidak Puas" class="sr-only peer"
+                                {{ old('kepuasan') == 'Tidak Puas' ? 'checked' : '' }}>
+                            <div
+                                class="emoji-card flex flex-col items-center justify-center border-2 border-gray-200 rounded-xl p-4 hover:bg-blue-50 peer-checked:border-blue-500 peer-checked:bg-blue-100 transition-all duration-200">
+                                <span class="text-4xl mb-2 emoji-float">😠</span>
+                                <span class="text-sm font-medium text-center">Tidak Puas</span>
+                            </div>
+                        </label>
+                    </div>
+                    @error('kepuasan')
+                        <p class="mt-2 text-sm text-red-600 flex items-center">
+                            <i class="fas fa-exclamation-circle mr-1"></i>
+                            {{ $message }}
+                        </p>
+                    @enderror
                 </div>
-                <div class="grid grid-cols-2 gap-4">
-                    <label class="relative cursor-pointer">
-                        <input type="radio" name="pungutan" value="Ada" class="sr-only peer"
-                            {{ old('pungutan') == 'Ada' ? 'checked' : '' }}>
-                        <div
-                            class="emoji-card flex flex-col items-center justify-center border-2 border-gray-200 rounded-xl p-4 hover:bg-red-50 peer-checked:border-red-500 peer-checked:bg-red-100 transition-all duration-200">
-                            <span class="text-4xl mb-2 emoji-float">💸</span>
-                            <span class="text-sm font-medium text-center">Ada Pungutan</span>
-                        </div>
-                    </label>
-                    <label class="relative cursor-pointer">
-                        <input type="radio" name="pungutan" value="Tidak Ada" class="sr-only peer"
-                            {{ old('pungutan') == 'Tidak Ada' ? 'checked' : '' }}>
-                        <div
-                            class="emoji-card flex flex-col items-center justify-center border-2 border-gray-200 rounded-xl p-4 hover:bg-green-50 peer-checked:border-green-500 peer-checked:bg-green-100 transition-all duration-200">
-                            <span class="text-4xl mb-2 emoji-float">✅</span>
-                            <span class="text-sm font-medium text-center">Tidak Ada Pungutan</span>
-                        </div>
-                    </label>
-                </div>
-                @error('pungutan')
-                    <p class="mt-2 text-sm text-red-600 flex items-center">
-                        <i class="fas fa-exclamation-circle mr-1"></i>
-                        {{ $message }}
-                    </p>
-                @enderror
-            </div>
 
-            <!-- Kritik dan Saran -->
-            <div class="form-section">
-                <div class="section-title">
-                    <i class="fas fa-comment-dots"></i>
-                    <span>Kritik dan Saran (Opsional)</span>
-                </div>
-                <textarea name="saran" id="saran" rows="4"
-                    class="textarea-saran block w-full px-4 py-3 border rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                    placeholder="Tulis kritik dan saran Anda di sini..." oninput="updateCharacterCount()">{{ old('saran') }}</textarea>
-                @error('saran')
-                    <p class="mt-2 text-sm text-red-600 flex items-center">
-                        <i class="fas fa-exclamation-circle mr-1"></i>
-                        {{ $message }}
-                    </p>
-                @enderror
-                <div id="character-count" class="mt-2 text-sm text-green-600 flex items-center">
-                    <i class="fas fa-keyboard mr-1"></i>
-                    <span>0 Karakter</span>
+                <!-- Kolom 3: Pungutan dan Saran -->
+                <div class="form-section hoverable-card fade-in" style="animation-delay: 0.2s">
+                    <div class="survey-step mb-4">3</div>
+                    <div class="section-title">
+                        <i class="fas fa-hand-holding-usd"></i>
+                        <span>Apakah Ada Pungutan?</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 mb-4">
+                        <label class="relative cursor-pointer">
+                            <input type="radio" name="pungutan" value="Ada" class="sr-only peer"
+                                {{ old('pungutan') == 'Ada' ? 'checked' : '' }}>
+                            <div
+                                class="emoji-card flex flex-col items-center justify-center border-2 border-gray-200 rounded-xl p-4 hover:bg-red-50 peer-checked:border-red-500 peer-checked:bg-red-100 transition-all duration-200">
+                                <span class="text-4xl mb-2 emoji-float"><i class="fa-solid fa-handshake"></i></span>
+                                <span class="text-sm font-medium text-center">Ada </span>
+                            </div>
+                        </label>
+                        <label class="relative cursor-pointer">
+                            <input type="radio" name="pungutan" value="Tidak Ada" class="sr-only peer"
+                                {{ old('pungutan') == 'Tidak Ada' ? 'checked' : '' }}>
+                            <div
+                                class="emoji-card flex flex-col items-center justify-center border-2 border-gray-200 rounded-xl p-4 hover:bg-green-50 peer-checked:border-green-500 peer-checked:bg-green-100 transition-all duration-200">
+                                <span class="text-4xl mb-2 emoji-float"><i class="fa-solid fa-handshake-slash"></i></span>
+                                <span class="text-sm font-medium text-center">Tidak Ada </span>
+                            </div>
+                        </label>
+                    </div>
+                    @error('pungutan')
+                        <p class="mt-2 text-sm text-red-600 flex items-center">
+                            <i class="fas fa-exclamation-circle mr-1"></i>
+                            {{ $message }}
+                        </p>
+                    @enderror
+
+                    <div class="section-title mt-4">
+                        <i class="fas fa-comment-dots"></i>
+                        <span>Kritik dan Saran (Opsional)</span>
+                    </div>
+                    <textarea name="saran" id="saran" rows="2"
+                        class="textarea-saran block w-full px-4 py-3 border rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                        placeholder="Tulis kritik dan saran Anda di sini..." oninput="updateCharacterCount()">{{ old('saran') }}</textarea>
+                    @error('saran')
+                        <p class="mt-2 text-sm text-red-600 flex items-center">
+                            <i class="fas fa-exclamation-circle mr-1"></i>
+                            {{ $message }}
+                        </p>
+                    @enderror
+                    <div id="character-count" class="mt-2 text-sm text-green-600 flex items-center">
+                        <i class="fas fa-keyboard mr-1"></i>
+                        <span>0 Karakter</span>
+                    </div>
                 </div>
             </div>
 
             <!-- Tombol Submit -->
-            <div class="flex justify-end">
+            <div class="flex justify-end mt-4">
                 <button type="submit"
                     class="submit-button px-6 py-3 text-white rounded-lg shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 flex items-center">
                     <i class="fas fa-paper-plane mr-2"></i>

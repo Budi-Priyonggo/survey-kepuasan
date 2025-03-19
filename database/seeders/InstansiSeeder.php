@@ -11,16 +11,16 @@ class InstansiSeeder extends Seeder
     public function run()
     {
         $instansis = [
-            'Instansi Pendidikan Nasional',
-            'Kementerian Kesehatan Republik Indonesia',
-            'Badan Pemeriksa Keuangan (BPK)',
-            'Lembaga Ilmu Pengetahuan Indonesia (LIPI)',
-            'Universitas Indonesia',
-            'Dinas Pendidikan Provinsi Jawa Barat',
-            'Bank Negara Indonesia (BNI)',
-            'Kantor Pemerintahan Kota Jakarta',
-            'Badan Meteorologi, Klimatologi, dan Geofisika (BMKG)',
-            'Kementerian Perdagangan Republik Indonesia',
+            'Bina Utama',
+            'Sinar Mandiri',
+            'Pusaka Sejahtera',
+            'Cipta Karya',
+            'Artha Mandiri',
+            'Tunas Jaya',
+            'Mega Solusi',
+            'Cahaya Utama',
+            'Alam Lestari',
+            'Terang Abadi',
         ];
 
         foreach ($instansis as $instansi) {

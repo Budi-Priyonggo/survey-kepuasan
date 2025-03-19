@@ -63,15 +63,38 @@ class InstansiController extends Controller
             'end_date.after_or_equal' => 'Tanggal akhir tidak boleh sebelum dari tanggal mulai.',
         ]);
 
-        $query = $instansi->hasil();
+        $baseQuery = $instansi->hasil();
 
-        if ($request->filled('start_date') && $request->filled('end_date')) {
-            $query->whereBetween('created_at', [$request->start_date, $request->end_date]);
+        if ($request->filled(['start_date', 'end_date'])) {
+            $baseQuery->whereBetween('created_at', [$request->start_date, $request->end_date]);
         }
 
-        $hasil = $query->paginate(5);
+        $allData = $baseQuery->get();
 
-        return view('instansi.show', compact('instansi', 'hasil'));
+        $statistics = [
+            'total' => $allData->count(),
+            'kepuasan' => [
+                'Sangat Puas' => $allData->where('kepuasan', 'Sangat Puas')->count(),
+                'Puas' => $allData->where('kepuasan', 'Puas')->count(),
+                'Cukup Puas' => $allData->where('kepuasan', 'Cukup Puas')->count(),
+                'Tidak Puas' => $allData->where('kepuasan', 'Tidak Puas')->count(),
+            ],
+            'pungutan' => [
+                'Ada' => $allData->where('pungutan', 'Ada')->count(),
+                'Tidak Ada' => $allData->where('pungutan', 'Tidak Ada')->count(),
+            ],
+            'total_saran' => $allData->whereNotNull('saran')->where('saran', '!=', '')->count()
+        ];
+
+        $paginationQuery = $instansi->hasil();
+
+        if ($request->filled(['start_date', 'end_date'])) {
+            $paginationQuery->whereBetween('created_at', [$request->start_date, $request->end_date]);
+        }
+
+        $hasil = $paginationQuery->paginate(5);
+
+        return view('instansi.show', compact('instansi', 'hasil', 'statistics'));
     }
 
     /**
