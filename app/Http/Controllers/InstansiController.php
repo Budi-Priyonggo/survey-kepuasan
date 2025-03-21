@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Instansi;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Carbon\Carbon;
 
 class InstansiController extends Controller
 {
@@ -66,7 +67,8 @@ class InstansiController extends Controller
         $baseQuery = $instansi->hasil();
 
         if ($request->filled(['start_date', 'end_date'])) {
-            $baseQuery->whereBetween('created_at', [$request->start_date, $request->end_date]);
+            $baseQuery->whereDate('created_at', '>=', $request->start_date)
+                ->whereDate('created_at', '<=', $request->end_date);
         }
 
         $allData = $baseQuery->get();
@@ -86,10 +88,12 @@ class InstansiController extends Controller
             'total_saran' => $allData->whereNotNull('saran')->where('saran', '!=', '')->count()
         ];
 
+        // Gunakan metode yang sama seperti $baseQuery untuk konsistensi
         $paginationQuery = $instansi->hasil();
 
         if ($request->filled(['start_date', 'end_date'])) {
-            $paginationQuery->whereBetween('created_at', [$request->start_date, $request->end_date]);
+            $paginationQuery->whereDate('created_at', '>=', $request->start_date)
+                ->whereDate('created_at', '<=', $request->end_date);
         }
 
         $hasil = $paginationQuery->paginate(5);

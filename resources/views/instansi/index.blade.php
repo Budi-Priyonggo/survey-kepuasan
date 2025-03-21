@@ -36,7 +36,7 @@
                                 <button type="submit"
                                     class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all ml-1">Cari</button>
                             </form>
-                            <button @click="openAddModal = true"
+                            <button @click="$store.modalState.open()"
                                 class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-all">
                                 Tambah Instansi
                             </button>
@@ -90,8 +90,8 @@
                                     @if (request()->has('search') && $instansi->isEmpty())
                                         <tr>
                                             <td colspan="3" class="px-6 py-4 text-center text-gray-500">
-                                                <img src="{{ asset('images/not-found.png') }}"
-                                                    alt="No Search Results" class="mx-auto w-[200px] h-[200px]">
+                                                <img src="{{ asset('images/not-found.png') }}" alt="No Search Results"
+                                                    class="mx-auto w-[200px] h-[200px]">
                                                 <p class="mt-4">Instansi tidak ditemukan.</p>
                                             </td>
                                         </tr>
@@ -119,8 +119,8 @@
         </div>
 
         <!-- Modal Tambah -->
-        <div x-show="openAddModal" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50"
-            x-cloak>
+        <div x-show="$store.modalState.addModal"
+            class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50" x-cloak>
             <div class="bg-white p-6 rounded shadow-lg w-96">
                 <h2 class="text-lg font-bold mb-4">Tambah Instansi</h2>
                 <form method="POST" action="{{ route('instansi.store') }}">
@@ -134,11 +134,8 @@
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
 
-
-
-
                     <div class="flex justify-end space-x-2 mt-4">
-                        <button type="button" @click="openAddModal = false"
+                        <button type="button" @click="$store.modalState.close()"
                             class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition">Batal</button>
                         <button type="submit"
                             class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition">Simpan</button>
@@ -195,4 +192,18 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.store('modalState', {
+                addModal: {{ $errors->any() ? 'true' : 'false' }},
+                open() {
+                    this.addModal = true;
+                },
+                close() {
+                    this.addModal = false;
+                }
+            });
+        });
+    </script>
 </x-app-layout>

@@ -371,11 +371,6 @@
                             </option>
                         @endforeach
                     </select>
-                    
-                    <div class="text-center pt-4">
-                        <img src="{{ asset('images/image.png') }}" alt="Instansi Icon"
-                            class="mx-auto w-[150px] h-[150px] max-w-full">
-                    </div>
 
                     @error('instansi_id')
                         <p class="mt-2 text-sm text-red-600 flex items-center">
@@ -383,6 +378,12 @@
                             {{ $message }}
                         </p>
                     @enderror
+
+                    <div class="text-center pt-4">
+                        <img src="{{ asset('images/image.png') }}" alt="Instansi Icon"
+                            class="mx-auto w-[150px] h-[150px] max-w-full">
+                    </div>
+
                 </div>
 
                 <!-- Kolom 2: Tingkat Kepuasan -->
@@ -460,7 +461,8 @@
                                 {{ old('pungutan') == 'Tidak Ada' ? 'checked' : '' }}>
                             <div
                                 class="emoji-card flex flex-col items-center justify-center border-2 border-gray-200 rounded-xl p-4 hover:bg-green-50 peer-checked:border-green-500 peer-checked:bg-green-100 transition-all duration-200">
-                                <span class="text-4xl mb-2 emoji-float"><i class="fa-solid fa-handshake-slash"></i></span>
+                                <span class="text-4xl mb-2 emoji-float"><i
+                                        class="fa-solid fa-handshake-slash"></i></span>
                                 <span class="text-sm font-medium text-center">Tidak Ada </span>
                             </div>
                         </label>
